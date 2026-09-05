@@ -12,41 +12,35 @@
 /******************************
  * ROW
  *****************************/
-#define ROW1_GPIO      GPIO_Pin_7
-#define ROW1_PORT      GPIOC
+#define ROW1_GPIO      GPIO_Pin_2
+#define ROW1_PORT      GPIOD
 
-#define ROW2_GPIO      GPIO_Pin_6
+#define ROW2_GPIO      GPIO_Pin_7
 #define ROW2_PORT      GPIOC
 
-#define ROW3_GPIO      GPIO_Pin_5
+#define ROW3_GPIO      GPIO_Pin_6
 #define ROW3_PORT      GPIOC
 
-#define ROW4_GPIO      GPIO_Pin_4
+#define ROW4_GPIO      GPIO_Pin_5
 #define ROW4_PORT      GPIOC
 
-#define ROW5_GPIO      GPIO_Pin_6
-#define ROW5_PORT      GPIOD
-
-#define ROW6_GPIO      GPIO_Pin_5
-#define ROW6_PORT      GPIOD
-
-#define ROW7_GPIO      GPIO_Pin_0
-#define ROW7_PORT      GPIOC
-
-#define ROW8_GPIO      GPIO_Pin_3
-#define ROW8_PORT      GPIOC
+#define ROW5_GPIO      GPIO_Pin_4
+#define ROW5_PORT      GPIOC
 
 /******************************
  * COL
  *****************************/
-#define COL1_GPIO      GPIO_Pin_2
+#define COL1_GPIO      GPIO_Pin_3
 #define COL1_PORT      GPIOD
 
-#define COL2_GPIO      GPIO_Pin_3
+#define COL2_GPIO      GPIO_Pin_4
 #define COL2_PORT      GPIOD
 
-#define COL3_GPIO      GPIO_Pin_4
-#define COL3_PORT      GPIOD
+#define COL3_GPIO      GPIO_Pin_3
+#define COL3_PORT      GPIOC
+
+#define COL4_GPIO      GPIO_Pin_0
+#define COL4_PORT      GPIOC
 
 #define led_low(GPIOx, GPIO_Pin)         GPIO_WriteBit(GPIOx, GPIO_Pin, Bit_RESET)
 #define led_high(GPIOx, GPIO_Pin)        GPIO_WriteBit(GPIOx, GPIO_Pin, Bit_SET)
@@ -62,9 +56,6 @@ typedef enum
     IO_ROW3,
     IO_ROW4,
     IO_ROW5,
-    IO_ROW6,
-    IO_ROW7,
-    IO_ROW8,
 
     ROW_IO_MAX
 } ROW_IO_INDEX;
@@ -74,6 +65,7 @@ typedef enum
     IO_COL1 = 0,
     IO_COL2,
     IO_COL3,
+    IO_COL4,
 
     COL_IO_MAX
 } COL_IO_INDEX;
@@ -91,9 +83,6 @@ const static IO_Table_t row_io_table[] =
     {ROW3_PORT, ROW3_GPIO},   // ROW3
     {ROW4_PORT, ROW4_GPIO},   // ROW4
     {ROW5_PORT, ROW5_GPIO},   // ROW5
-    {ROW6_PORT, ROW6_GPIO},   // ROW6
-    {ROW7_PORT, ROW7_GPIO},   // ROW7
-    {ROW8_PORT, ROW8_GPIO},   // ROW8
 };
 
 //col gpio table
@@ -102,18 +91,28 @@ const static IO_Table_t col_io_table[] =
     {COL1_PORT, COL1_GPIO},   // COL1
     {COL2_PORT, COL2_GPIO},   // COL2
     {COL3_PORT, COL3_GPIO},   // COL3
+    {COL4_PORT, COL4_GPIO},   // COL4
 };
 
 //映射表
-LED_t LedBuf[8][3] = {
-        {{off, FUNC_5v_vol},        {off, FUNC_5v_sta},         {off, FUNC_PPS_1Bit}},
-        {{off, FUNC_9v_vol},        {off, FUNC_9v_sta},         {off, FUNC_PPS_2Bit}},
-        {{off, FUNC_12v_vol},       {off, FUNC_12v_sta},        {off, FUNC_PPS_3Bit}},
-        {{off, FUNC_15v_vol},       {off, FUNC_15v_sta},        {off, FUNC_PPS_4Bit}},
-        {{off, FUNC_20v_vol},       {off, FUNC_20v_sta},        {off, FUNC_PPS_5Bit}},
-        {{off, FUNC_PPS},           {off, FUNC_PPS_sta},        {off, FUNC_PPS_6Bit}},
-        {{off, null},               {off, null},                {off, FUNC_PPS_7Bit}},
-        {{off, null},               {off, null},                {off, FUNC_PPS_8Bit}},
+//LED_t LedBuf[8][3] = {
+//        {{off, FUNC_5v_vol},        {off, FUNC_5v_sta},         {off, FUNC_PPS_1Bit}},
+//        {{off, FUNC_9v_vol},        {off, FUNC_9v_sta},         {off, FUNC_PPS_2Bit}},
+//        {{off, FUNC_12v_vol},       {off, FUNC_12v_sta},        {off, FUNC_PPS_3Bit}},
+//        {{off, FUNC_15v_vol},       {off, FUNC_15v_sta},        {off, FUNC_PPS_4Bit}},
+//        {{off, FUNC_20v_vol},       {off, FUNC_20v_sta},        {off, FUNC_PPS_5Bit}},
+//        {{off, FUNC_PPS},           {off, FUNC_PPS_sta},        {off, FUNC_PPS_6Bit}},
+//        {{off, null},               {off, null},                {off, FUNC_PPS_7Bit}},
+//        {{off, null},               {off, null},                {off, FUNC_PPS_8Bit}},
+//};
+
+//映射表
+LED_t LedBuf[5][4] = {
+        {{off, FUNC_5v_vol},        {off, FUNC_5v_sta},         {off, FUNC_15v_vol},        {off, FUNC_15v_sta}},
+        {{off, FUNC_9v_vol},        {off, FUNC_9v_sta},         {off, FUNC_20v_vol},        {off, FUNC_20v_sta}},
+        {{off, FUNC_12v_vol},       {off, FUNC_12v_sta},        {off, FUNC_PPS},            {off, FUNC_PPS_sta}},
+        {{off, FUNC_PPS_1Bit},      {off, FUNC_PPS_2Bit},       {off, FUNC_PPS_3Bit},       {off, FUNC_PPS_4Bit}},
+        {{off, FUNC_PPS_5Bit},      {off, FUNC_PPS_6Bit},       {off, FUNC_PPS_7Bit},       {off, FUNC_PPS_8Bit}},
 };
 
 extern volatile uint32_t tick;
@@ -167,9 +166,9 @@ static void Col_AllOff()
 void LED_Buf_Change(led_function func, led_sta state)
 {
     volatile uint8_t row, col;
-    for (row = 0; row < 8; row++)
+    for (row = 0; row < ROW_IO_MAX; row++)
     {
-        for (col = 0; col < 3; col++)
+        for (col = 0; col < COL_IO_MAX; col++)
         {
             if (LedBuf[row][col].function & func)
             {
@@ -179,7 +178,7 @@ void LED_Buf_Change(led_function func, led_sta state)
     }
 }
 
-//全亮
+//全亮    used test
 void LED_Full()
 {
     for (int i = 0; i < ROW_IO_MAX; ++i) {
@@ -193,7 +192,7 @@ void LED_Full()
 void LED_PPS_Vol_Set(uint8_t vol)
 {
     volatile int i;
-    for (i = 0; i < 8; ++i) {
+    for (i = 0; i < 8; ++i) {           //8BIT
         if (vol & (1 << i)) {
             LED_Buf_Change((FUNC_PPS_1Bit << i), on);
         }

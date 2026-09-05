@@ -181,11 +181,11 @@ int main(void)
 
     ADC_DMA_Init();
     button_init();
-//    LED_IO_Init();
+    LED_IO_Init();
     I2C_Master_Init();
 //    Delay_Ms(3000);         //延时先这样等QC，后面while中轮询等待
-
-    Charge_dec = CH224Q_Init();
+//
+//    Charge_dec = CH224Q_Init();
 
     TIM2_init(10 - 1, 48 - 1);
 
@@ -200,6 +200,9 @@ int main(void)
 //        if (tick - time > 1000) {
 //            time = tick;
 //        }
+        if (tick > 3000 && Charge_dec != 1) {
+            Charge_dec = CH224Q_Init();
+        }
 
         if (tick - alive_time > 5000 && first_click == 0) {
             first_click = 1;
@@ -259,7 +262,7 @@ void TIM2_IRQHandler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
 void TIM2_IRQHandler(void)
 {
     if (TIM_GetITStatus(TIM2, TIM_IT_Update)) {
-//        LED_MUX_Process();
+        LED_MUX_Process();
     }
     TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 }

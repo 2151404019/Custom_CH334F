@@ -116,7 +116,7 @@ void I2C1_EV_IRQHandler(void)
             addr_received = 1;
         } else {
             /* 后续字节:命令对应的数据(Write Word 等) */
-//            eeprom[eeprom_addr] = data;           //后续main while（1）处理
+//            eeprom[eeprom_addr] = data;           //后续process处理
             eeprom_addr++;
 
             page_offset++;

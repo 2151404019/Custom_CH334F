@@ -378,6 +378,7 @@ uint8_t CH224Q_Init()
     if (CH224Q.I2C_status.QC2 || CH224Q.I2C_status.QC3 ) {
         CH224Q.PD_Vol.VOL_5 = 1;
         CH224Q.PD_Vol.VOL_9 = 1;
+        CH224Q.PD_Vol.VOL_15 = 1;
         CH224Q.PD_Vol.VOL_12 = 1;
         CH224Q.PD_Vol.VOL_20 = 1;
 
